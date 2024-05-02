@@ -12,10 +12,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class PlaceOrderTest {
-  @Test
-  public void placeOrderDetails() {
-	  
-  }
+  
   
   @DataProvider(name="placeOrder")
   public String[][] getData() throws IOException, ParseException{
@@ -26,11 +23,18 @@ public class PlaceOrderTest {
 	JSONObject jsonobj= (JSONObject) obj;
 	JSONArray userArray=(JSONArray) jsonobj.get("PlaceOrderDets");
 	String arr[][]= new String[userArray.size()][];
-	for(int i=0; i<userArray.size();i++)
-	{
-		JSONObject user=(JSONObject)userArray.get(i);
-		
-	}
+    for(int i=0; i< userArray.size(); i++)
+    {
+     JSONObject user=(JSONObject)userArray.get(i);
+     String strName=(String)user.get("Name");
+     String strCountry=(String)user.get("Country");
+     String strCity=(String)user.get("City");
+     String strCard=(String)user.get("CreditCard");
+     String strMonth=(String)user.get("Month");
+     String strYear=(String)user.get("Year");
+	 String record[]= { strName, strCountry, strCity, strCard, strMonth, strYear};
+	 arr[i]=record;
+    }
 	return arr;
   }
 }
